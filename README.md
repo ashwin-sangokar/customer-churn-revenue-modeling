@@ -1,9 +1,26 @@
-# Customer Churn & Revenue Risk Modeling
+# 📊 Customer Churn & Revenue Risk Modeling
+
+## 🧠 Executive Summary
+
+- 26.5% of customers churn, but they account for **30.5% of total revenue**.
+- Over **85% of churn-related revenue loss** comes from month-to-month contracts.
+- Month-to-month customers in their first 12 months represent the **highest financial risk segment**.
+- Targeted retention in this segment offers the highest ROI opportunity.
+
+---
 
 ## 📌 Business Problem
 
-Telecom company experiencing customer churn.  
-Objective: Identify churn drivers, quantify revenue risk, and build predictive models to support retention strategies.
+A telecom company is experiencing customer churn that is impacting recurring revenue.
+
+This project aims to:
+
+- Identify primary churn drivers  
+- Quantify revenue leakage  
+- Detect high-risk customer segments  
+- Prioritize retention strategies based on financial impact  
+
+The focus is on **revenue-weighted churn analysis**, not just churn rate.
 
 ---
 
@@ -11,50 +28,139 @@ Objective: Identify churn drivers, quantify revenue risk, and build predictive m
 
 - 7,043 customers
 - 21 original features
-- 1 engineered feature (churn_flag)
-- 1 analytical feature (tenure_group)
+- 1 engineered feature: `churn_flag`
+- 1 analytical feature: `tenure_group`
 
-Includes:
-- Demographics
-- Service subscriptions
-- Contract details
-- Billing information
-- Target variable (Churn)
+Data categories include:
+
+- Customer demographics  
+- Subscription & service usage  
+- Contract details  
+- Payment behavior  
+- Billing information  
+
+Target variable: `churn` / `churn_flag`
 
 ---
 
-## 🧹 Data Cleaning Summary
+## 🧹 Data Cleaning & Preparation
 
-- Converted TotalCharges to numeric
+Key transformations:
+
+- Converted `total_charges` to numeric
 - Resolved 11 structural missing values (tenure = 0 customers)
-- Removed identifier column (customerID)
-- Added churn_flag (binary target)
-- Verified service dependency consistency
-- Standardized column naming to snake_case
+- Removed identifier column (`customerID`)
+- Added `churn_flag` (binary target variable)
+- Engineered `tenure_group` for lifecycle analysis
+- Standardized column names to `snake_case`
+- Validated consistency across service-related fields
+
+Cleaned dataset: `/data/telco_churn_cleaned_v1.csv`
 
 ---
 
 ## ⚠ Data Risks Identified
 
-- Structural missingness in TotalCharges
-- Moderate class imbalance (73% No / 27% Yes)
-- Multicollinearity risk between tenure and total_charges
+- Structural missingness in `total_charges`
+- Moderate class imbalance (73% retained / 27% churned)
+- Multicollinearity between `tenure` and `total_charges`
+- Potential confounding between contract type and payment behavior
 
-Detailed documentation available in /docs folder.
+Detailed documentation available in `/docs`:
+
+- `DATA_DICTIONARY.md`
+- `DATA_RISK_REPORT.md`
+- `ASSUMPTION_LOG.md`
+
+---
+
+## 📈 Business EDA Highlights
+
+### 🔹 Churn Impact
+
+- Total Monthly Revenue: **$456,116**
+- Monthly Revenue Lost to Churn: **$139,130**
+- Revenue Loss Rate: **30.5%**
+
+Churn is concentrated among **higher-paying customers**.
+
+---
+
+### 🔹 Primary Churn Drivers
+
+1. **Contract Type**
+   - Month-to-month churn rate: 42.7%
+   - Generates majority of churn-related revenue loss
+
+2. **Early Tenure**
+   - 0–12 months churn rate: 47.4%
+   - First year is critical retention window
+
+3. **Payment Behavior**
+   - Electronic check churn rate: 45.3%
+   - Payment automation correlates with stability
+
+4. **Higher Monthly Charges**
+   - Churned customers pay ~21% more on average
+
+---
+
+### 🔥 Highest-Risk Segment
+
+**Month-to-month customers with 0–12 months tenure**
+
+- Churn Rate: 51.35%
+- Revenue Share: 25.45%
+- Monthly Revenue Loss: $68,301
+
+This segment represents the highest ROI intervention opportunity.
+
+Full EDA report available in:
+`/docs/EDA_REPORT.md`
+
+---
+
+## 🗄 SQL Business Validation
+
+All EDA insights were cross-validated using SQL queries executed in a MySQL environment.
+
+SQL assets located in `/sql`:
+
+- `schema.sql`
+- `business_queries.sql`
+- `SQL_RESULTS.md`
+
+The SQL layer confirms consistency between analytical and database-level aggregation.
 
 ---
 
 ## 📂 Repository Structure
-
-- `/data` → Raw and cleaned datasets
-- `/notebooks` → Data audit & EDA
-- `/docs` → Documentation files
+data/ → Raw & cleaned datasets
+notebooks/ → Data audit & business EDA
+docs/ → Detailed documentation & reports
+sql/ → Schema, queries, and SQL validation
 
 ---
 
-## 🚀 Next Steps
+## 🚀 Project Roadmap
 
+### ✅ Phase 1 — Data Audit & Cleaning  
+### ✅ Phase 2 — Business EDA & SQL Validation  
+🔜 Phase 3 — Predictive Modeling (Logistic Regression)  
+🔜 Phase 4 — Power BI Executive Dashboard  
+🔜 Phase 5 — Retention Strategy Simulation  
+
+---
+
+## 🎯 Objective
+
+Transform churn from a reporting metric into a **decision-driven revenue strategy**.
+
+This project demonstrates end-to-end capability in:
+
+- Data auditing
+- Feature engineering
 - Business-driven EDA
-- Revenue impact analysis
-- Logistic regression modeling
-- Executive dashboard (Power BI)
+- SQL validation
+- Revenue risk analysis
+- Strategic prioritization
