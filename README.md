@@ -162,22 +162,8 @@ Key elements:
 
 ### Dashboard Preview
 
-Page 1 — Executive Overview
+dashboard/dashboard.pdf
 
-![Dashboard Page 1](dashboard/dashboard.pdf)
-
-Page 2 — Revenue Risk Segmentation
-
-![Dashboard Page 2](dashboard/dashboard.pdf)
-
-
-## 📂 Repository Structure
-data/ → Raw & cleaned datasets
-notebooks/ → Data audit & business EDA
-docs/ → Detailed documentation & reports
-sql/ → Schema, queries, and SQL validation
-dashboard/  → Power BI dashboard and visual previews
-README.md
 
 ---
 
