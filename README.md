@@ -134,21 +134,50 @@ The SQL layer confirms consistency between analytical and database-level aggrega
 
 ---
 
+## 📊 Interactive Dashboard (Power BI)
+
+A two-page interactive Power BI dashboard was built to visualize churn risk and revenue exposure across customer segments.
+
+### Page 1 — Executive Overview
+
+Provides a high-level summary of churn impact and revenue risk.
+
+Key elements:
+
+- KPI overview (Customers, Churn Rate, Revenue, Revenue Loss, ARPU)
+- Churn risk by contract type
+- Revenue exposure by contract
+- Lifecycle churn analysis (tenure groups)
+
+### Page 2 — Revenue Risk Segmentation
+
+A deeper analytical view designed to identify high-impact churn segments.
+
+Key elements:
+
+- Revenue concentration matrix (Contract × Tenure)
+- Revenue share and churn rate comparison
+- Priority scoring to rank high-risk segments
+- Identification of the highest financial risk segment
+
+### Dashboard Preview
+
+Page 1 — Executive Overview
+
+![Dashboard Page 1](dashboard/dashboard.pdf)
+
+Page 2 — Revenue Risk Segmentation
+
+![Dashboard Page 2](dashboard/dashboard.pdf)
+
+
 ## 📂 Repository Structure
 data/ → Raw & cleaned datasets
 notebooks/ → Data audit & business EDA
 docs/ → Detailed documentation & reports
 sql/ → Schema, queries, and SQL validation
-
----
-
-## 🚀 Project Roadmap
-
-### ✅ Phase 1 — Data Audit & Cleaning  
-### ✅ Phase 2 — Business EDA & SQL Validation  
-🔜 Phase 3 — Predictive Modeling (Logistic Regression)  
-🔜 Phase 4 — Power BI Executive Dashboard  
-🔜 Phase 5 — Retention Strategy Simulation  
+dashboard/  → Power BI dashboard and visual previews
+README.md
 
 ---
 
@@ -164,3 +193,13 @@ This project demonstrates end-to-end capability in:
 - SQL validation
 - Revenue risk analysis
 - Strategic prioritization
+
+## 💡 Skills Demonstrated
+
+Python  
+Pandas & Data Analysis  
+SQL (MySQL)  
+Business Analytics  
+Power BI Dashboarding  
+Customer Churn Analysis  
+Revenue Risk Modeling
