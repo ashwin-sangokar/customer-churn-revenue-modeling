@@ -1,82 +1,88 @@
 # 📊 Customer Churn & Revenue Risk Modeling
 
-## 🧠 Executive Summary
-
-- 26.5% of customers churn, but they account for **30.5% of total revenue**.
-- Over **85% of churn-related revenue loss** comes from month-to-month contracts.
-- Month-to-month customers in their first 12 months represent the **highest financial risk segment**.
-- Targeted retention in this segment offers the highest ROI opportunity.
+An end-to-end data analytics project analyzing telecom customer churn and its impact on recurring revenue.  
+The analysis focuses on **revenue-weighted churn risk**, identifying high-impact customer segments and prioritizing retention strategies based on financial exposure.
 
 ---
 
-## 📌 Business Problem
+# 🧠 Executive Summary
 
-A telecom company is experiencing customer churn that is impacting recurring revenue.
+- **26.5% of customers churn**, but they account for **30.5% of total revenue**.
+- Over **85% of churn-related revenue loss** comes from **month-to-month contracts**.
+- Customers in their **first 12 months** represent the **highest financial risk segment**.
+- Targeted retention in this segment provides the **highest ROI opportunity**.
+
+---
+
+# 📌 Business Problem
+
+Telecom companies face significant revenue loss due to customer churn.  
+While churn rate is commonly tracked, businesses often fail to understand **which customers create the highest financial risk**.
 
 This project aims to:
 
-- Identify primary churn drivers  
-- Quantify revenue leakage  
-- Detect high-risk customer segments  
-- Prioritize retention strategies based on financial impact  
+- Identify **primary churn drivers**
+- Quantify **revenue leakage**
+- Detect **high-risk customer segments**
+- Prioritize **retention strategies based on financial impact**
 
 The focus is on **revenue-weighted churn analysis**, not just churn rate.
 
 ---
 
-## 📊 Dataset Overview
+# 📊 Dataset Overview
 
-- 7,043 customers
-- 21 original features
-- 1 engineered feature: `churn_flag`
-- 1 analytical feature: `tenure_group`
+- **7,043 customers**
+- **21 original features**
+- **1 engineered feature:** `churn_flag`
+- **1 analytical feature:** `tenure_group`
 
-Data categories include:
+### Data Categories
 
-- Customer demographics  
-- Subscription & service usage  
-- Contract details  
-- Payment behavior  
-- Billing information  
+- Customer demographics
+- Subscription & service usage
+- Contract details
+- Payment behavior
+- Billing information
 
-Target variable: `churn` / `churn_flag`
+**Target variable:** `churn` / `churn_flag`
 
 ---
 
-## 🧹 Data Cleaning & Preparation
+# 🧹 Data Cleaning & Preparation
 
-Key transformations:
+Key transformations performed during data preparation:
 
 - Converted `total_charges` to numeric
-- Resolved 11 structural missing values (tenure = 0 customers)
+- Resolved **11 structural missing values**
 - Removed identifier column (`customerID`)
-- Added `churn_flag` (binary target variable)
-- Engineered `tenure_group` for lifecycle analysis
-- Standardized column names to `snake_case`
+- Created binary target variable **`churn_flag`**
+- Engineered **`tenure_group`** for lifecycle analysis
+- Standardized column names to **snake_case**
 - Validated consistency across service-related fields
 
-Cleaned dataset: `/data/telco_churn_cleaned_v1.csv`
+Cleaned dataset:
+/data/telco_churn_cleaned_v1.csv
 
 ---
 
-## ⚠ Data Risks Identified
+# ⚠ Data Risks Identified
 
 - Structural missingness in `total_charges`
 - Moderate class imbalance (73% retained / 27% churned)
 - Multicollinearity between `tenure` and `total_charges`
 - Potential confounding between contract type and payment behavior
 
-Detailed documentation available in `/docs`:
-
-- `DATA_DICTIONARY.md`
-- `DATA_RISK_REPORT.md`
-- `ASSUMPTION_LOG.md`
+Detailed documentation available in:
+/docs/DATA_DICTIONARY.md
+/docs/DATA_RISK_REPORT.md
+/docs/ASSUMPTION_LOG.md
 
 ---
 
-## 📈 Business EDA Highlights
+# 📈 Business EDA Highlights
 
-### 🔹 Churn Impact
+## 🔹 Churn Impact
 
 - Total Monthly Revenue: **$456,116**
 - Monthly Revenue Lost to Churn: **$139,130**
@@ -86,90 +92,168 @@ Churn is concentrated among **higher-paying customers**.
 
 ---
 
-### 🔹 Primary Churn Drivers
+## 🔹 Primary Churn Drivers
 
-1. **Contract Type**
-   - Month-to-month churn rate: 42.7%
-   - Generates majority of churn-related revenue loss
+### 1️⃣ Contract Type
 
-2. **Early Tenure**
-   - 0–12 months churn rate: 47.4%
-   - First year is critical retention window
+- Month-to-month churn rate: **42.7%**
+- Generates the majority of churn-related revenue loss
 
-3. **Payment Behavior**
-   - Electronic check churn rate: 45.3%
-   - Payment automation correlates with stability
+### 2️⃣ Early Customer Lifecycle
 
-4. **Higher Monthly Charges**
-   - Churned customers pay ~21% more on average
+- 0–12 months churn rate: **47.4%**
+- First year is the **critical retention window**
 
----
+### 3️⃣ Payment Behavior
 
-### 🔥 Highest-Risk Segment
+- Electronic check churn rate: **45.3%**
+- Payment automation correlates with lower churn
 
-**Month-to-month customers with 0–12 months tenure**
+### 4️⃣ Higher Monthly Charges
 
-- Churn Rate: 51.35%
-- Revenue Share: 25.45%
-- Monthly Revenue Loss: $68,301
-
-This segment represents the highest ROI intervention opportunity.
-
-Full EDA report available in:
-`/docs/EDA_REPORT.md`
+- Churned customers pay **~21% more on average**
 
 ---
 
-## 🗄 SQL Business Validation
+## 🔥 Highest Risk Segment
 
-All EDA insights were cross-validated using SQL queries executed in a MySQL environment.
+**Month-to-month customers with tenure between 0–12 months**
 
-SQL assets located in `/sql`:
+- Churn Rate: **51.35%**
+- Revenue Share: **25.45%**
+- Monthly Revenue Loss: **$68,301**
 
-- `schema.sql`
-- `business_queries.sql`
-- `SQL_RESULTS.md`
+This segment represents the **highest ROI intervention opportunity**.
 
-The SQL layer confirms consistency between analytical and database-level aggregation.
+Full exploratory analysis available in:
+/docs/EDA_REPORT.md
 
 ---
 
-## 📊 Interactive Dashboard (Power BI)
+# 🗄 SQL Business Validation
 
-A two-page interactive Power BI dashboard was built to visualize churn risk and revenue exposure across customer segments.
+All analytical insights were **cross-validated using SQL queries executed in MySQL**.
+
+SQL assets are available in:
+/sql/schema.sql
+/sql/business_queries.sql
+/sql/SQL_RESULTS.md
+
+This ensures consistency between **Python analysis and database-level aggregation**.
+
+---
+
+# 📊 Interactive Dashboard (Power BI)
+
+A **two-page Power BI dashboard** was built to visualize churn risk and revenue exposure across customer segments.
 
 ### Page 1 — Executive Overview
 
-Provides a high-level summary of churn impact and revenue risk.
+Provides a high-level summary of churn impact.
 
 Key elements:
 
-- KPI overview (Customers, Churn Rate, Revenue, Revenue Loss, ARPU)
+- KPI summary (Customers, Churn Rate, Revenue, Revenue Loss, ARPU)
 - Churn risk by contract type
 - Revenue exposure by contract
 - Lifecycle churn analysis (tenure groups)
 
+---
+
 ### Page 2 — Revenue Risk Segmentation
 
-A deeper analytical view designed to identify high-impact churn segments.
+Deeper analytical view designed to identify high-impact churn segments.
 
 Key elements:
 
 - Revenue concentration matrix (Contract × Tenure)
-- Revenue share and churn rate comparison
-- Priority scoring to rank high-risk segments
+- Revenue share vs churn rate comparison
+- Priority scoring for churn risk segments
 - Identification of the highest financial risk segment
 
-### Dashboard Preview
-
-dashboard/dashboard.pdf
-
+Dashboard preview:
+/dashboard/dashboard.pdf
 
 ---
 
-## 🎯 Objective
+# 📊 Statistical Validation
 
-Transform churn from a reporting metric into a **decision-driven revenue strategy**.
+To verify that observed churn patterns were **not caused by random variation**, statistical hypothesis testing was performed.
+
+Statistical analysis notebook:
+/notebooks/03_statistical_validation.ipynb
+
+### Tests Conducted
+
+### 1️⃣ Contract Type vs Churn  
+Chi-Square Test of Independence
+
+Result:
+Chi-square statistic = 1184.59
+p-value < 0.001
+
+Interpretation:
+
+Contract structure has a **statistically significant relationship with churn**.
+
+---
+
+### 2️⃣ Monthly Charges vs Churn  
+Independent Two-Sample T-Test
+
+Result:
+T-statistic = 16.53
+p-value < 0.001
+
+Interpretation:
+
+Churned customers **pay significantly higher monthly charges**.
+
+---
+
+### 3️⃣ Tenure vs Churn  
+Independent Two-Sample T-Test
+
+Result:
+T-statistic = -31.57
+p-value < 0.001
+
+Interpretation:
+
+Customers who churn have **significantly shorter tenure**.
+
+---
+
+### Conclusion
+
+All tested churn drivers show **strong statistical significance**, reinforcing the reliability of earlier exploratory findings.
+
+Detailed documentation:
+/docs/STATISTICAL_VALIDATION.md
+
+---
+
+# 🧾 Business Presentation
+
+A business-oriented presentation summarizes the analytical findings for non-technical stakeholders.
+
+The presentation includes:
+
+- Business problem framing
+- Dataset overview
+- Key churn drivers
+- Revenue risk concentration
+- Statistical validation
+- Strategic retention recommendations
+
+Presentation file:
+/Business_Presentation/Customer-Churn-and-Revenue-Risk-Analysis.pdf
+
+---
+
+# 🎯 Objective
+
+Transform churn from a simple reporting metric into a **decision-driven revenue strategy**.
 
 This project demonstrates end-to-end capability in:
 
@@ -178,14 +262,57 @@ This project demonstrates end-to-end capability in:
 - Business-driven EDA
 - SQL validation
 - Revenue risk analysis
-- Strategic prioritization
+- Statistical testing
+- Dashboard development
+- Business storytelling
 
-## 💡 Skills Demonstrated
+---
 
-Python  
-Pandas & Data Analysis  
-SQL (MySQL)  
-Business Analytics  
-Power BI Dashboarding  
-Customer Churn Analysis  
-Revenue Risk Modeling
+# 💡 Skills Demonstrated
+
+- Python  
+- Pandas & Data Analysis  
+- SQL (MySQL)  
+- Statistical Analysis  
+- Business Analytics  
+- Power BI Dashboarding  
+- Customer Churn Analysis  
+- Revenue Risk Modeling  
+
+---
+
+# 📂 Project Structure
+customer-churn-revenue-modeling
+│
+├── Business_Presentation
+│ └── Customer-Churn-and-Revenue-Risk-Analysis.pdf
+│
+├── dashboard
+│ ├── dashboard.pbix
+│ └── dashboard.pdf
+│
+├── data
+│ ├── dataset.csv
+│ └── telco_churn_cleaned_v1.csv
+│
+├── docs
+│ ├── ASSUMPTION_LOG.md
+│ ├── DATA_DICTIONARY.md
+│ ├── DATA_RISK_REPORT.md
+│ ├── EDA_REPORT.md
+│ └── STATISTICAL_VALIDATION.md
+│
+├── notebooks
+│ ├── 01_data_audit.ipynb
+│ ├── 02_business_eda.ipynb
+│ └── 03_statistical_validation.ipynb
+│
+├── sql
+│ ├── schema.sql
+│ ├── business_queries.sql
+│ └── SQL_RESULTS.md
+│
+└── README.md
+
+
+---
