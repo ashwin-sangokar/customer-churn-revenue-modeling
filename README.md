@@ -251,6 +251,78 @@ Presentation file:
 
 ---
 
+# 🤖 Predictive Modeling
+
+A predictive model was built to identify customers at high risk of churn and enable proactive retention strategies.
+
+Modeling notebook:
+`/notebooks/04_churn_prediction_model.ipynb`
+
+## Modeling Approach
+
+Two models were developed and compared:
+
+1️⃣ Logistic Regression  
+2️⃣ Random Forest Classifier
+
+The target variable used for prediction was:
+
+`churn_flag`
+
+Categorical variables were encoded using one-hot encoding, and numerical features were standardized for Logistic Regression.
+
+Dataset was split using:
+
+- **80% Training**
+- **20% Testing**
+
+Stratified sampling ensured consistent churn distribution between train and test sets.
+
+---
+
+## Model Performance
+
+| Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
+|------|------|------|------|------|------|
+| Logistic Regression | 0.798 | 0.65 | 0.52 | 0.58 | 0.84 |
+| Random Forest | 0.794 | 0.64 | 0.51 | 0.57 | 0.83 |
+
+Both models achieved strong predictive performance, with **Logistic Regression slightly outperforming Random Forest** on this dataset.
+
+---
+
+## Key Predictive Features
+
+Top drivers identified by the model include:
+
+- Contract type
+- Monthly charges
+- Customer tenure
+- Internet service type
+- Payment method behavior
+
+These factors align closely with the **EDA findings and statistical test results**, reinforcing the reliability of the analysis.
+
+---
+
+## Business Implications
+
+Predictive modeling enables telecom companies to:
+
+- Identify **high-risk customers early**
+- Target **retention strategies before churn occurs**
+- Reduce **revenue leakage from high-value customers**
+
+Example interventions:
+
+- Early lifecycle engagement for new customers
+- Contract upgrade incentives for month-to-month users
+- Pricing or value adjustments for high monthly charge segments
+
+Predictive churn models allow businesses to move from **reactive churn reporting to proactive churn prevention**.
+
+---
+
 # 🎯 Objective
 
 Transform churn from a simple reporting metric into a **decision-driven revenue strategy**.
@@ -278,41 +350,5 @@ This project demonstrates end-to-end capability in:
 - Power BI Dashboarding  
 - Customer Churn Analysis  
 - Revenue Risk Modeling  
-
----
-
-# 📂 Project Structure
-customer-churn-revenue-modeling
-│
-├── Business_Presentation
-│ └── Customer-Churn-and-Revenue-Risk-Analysis.pdf
-│
-├── dashboard
-│ ├── dashboard.pbix
-│ └── dashboard.pdf
-│
-├── data
-│ ├── dataset.csv
-│ └── telco_churn_cleaned_v1.csv
-│
-├── docs
-│ ├── ASSUMPTION_LOG.md
-│ ├── DATA_DICTIONARY.md
-│ ├── DATA_RISK_REPORT.md
-│ ├── EDA_REPORT.md
-│ └── STATISTICAL_VALIDATION.md
-│
-├── notebooks
-│ ├── 01_data_audit.ipynb
-│ ├── 02_business_eda.ipynb
-│ └── 03_statistical_validation.ipynb
-│
-├── sql
-│ ├── schema.sql
-│ ├── business_queries.sql
-│ └── SQL_RESULTS.md
-│
-└── README.md
-
 
 ---
